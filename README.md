@@ -2,7 +2,7 @@
 > List of all pharmacies in Kazakhstan
 
 ## General info
-Addresses of all pharmacies in Kazakhstan
+Addresses and names of all pharmacies in Kazakhstan
 
 ## Install it
 `pip install BeautifulSoup`<br/>
