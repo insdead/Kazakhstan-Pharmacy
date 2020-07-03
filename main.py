@@ -59,3 +59,14 @@ with open('notes.txt', 'r', encoding='utf8') as f:
 with open('notes.txt', 'w', encoding='utf8') as f:
     f.write(txt)
 
+with open('notes.txt', 'r', encoding='utf8') as f:
+    with open('notes2.txt', 'r', encoding='utf8') as f1:
+        with open('notes3.txt', 'a', encoding='utf8') as f2:
+            for line, line2 in zip(f, f1):
+                f2.write(line.strip())
+                f2.write(" ")
+                f2.write(line2.strip())
+                f2.write(" ")
+                f2.write('\n')
+                
+                
