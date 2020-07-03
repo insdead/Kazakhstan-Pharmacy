@@ -1,4 +1,4 @@
-# Project Name
+# Kazakhstan-Pharmacy
 > List of all pharmacies in Kazakhstan
 
 ## General info
