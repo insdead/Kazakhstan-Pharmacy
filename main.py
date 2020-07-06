@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import codecs
+import os
 
 list = [
     'aktau',
@@ -25,33 +26,27 @@ list = [
     'ekibastuz'
 ]
 
+lines_seen = set()
 
 for j in list:
     for i in range(1, 9):
         source = requests.get('https://i-teka.kz/' + str(j) + '/spisokaptek?page=' + str(i)).text
 
         soup =  BeautifulSoup(source, 'lxml')
-        result = ''
-        _name = ''
-        _n = '\n'
-        with open('notes2.txt', 'a', encoding='utf8') as f: 
-                f.write(_n)
+        address_result = ''
+        name_result = ''
 
-        for article in soup.find_all("div", class_="title-row"):
-            name = article.a.text
-            _name = name + ' - '
+        for title, address in zip(soup.find_all("div", class_="title-row"), soup.find_all("div", class_="address")):
+            pharma_title = title.a.text
+            name_result = pharma_title + ' - '
+
+            pharma_address = address.text 
+            address_result = pharma_address + '\n'
+
             with open('notes.txt', 'a', encoding='utf8') as f: 
-                f.write(_name)
-            _name = ''
-            
-
-        for article in soup.find_all("div", class_="address"):
-            name = article.text
-            result = name + '\n'
-            with open('notes2.txt', 'a', encoding='utf8') as f: 
-                f.write(result)
-            result = ''
-
+                f.write(name_result + " " + address_result)
+            name_result = ''
+            address_result = ''
 
 with open('notes.txt', 'r', encoding='utf8') as f:
     txt = f.read().replace(' ', '')
@@ -59,14 +54,7 @@ with open('notes.txt', 'r', encoding='utf8') as f:
 with open('notes.txt', 'w', encoding='utf8') as f:
     f.write(txt)
 
-with open('notes.txt', 'r', encoding='utf8') as f:
-    with open('notes2.txt', 'r', encoding='utf8') as f1:
-        with open('notes3.txt', 'a', encoding='utf8') as f2:
-            for line, line2 in zip(f, f1):
-                f2.write(line.strip())
-                f2.write(" ")
-                f2.write(line2.strip())
-                f2.write(" ")
-                f2.write('\n')
-                
-                
+with open('notes.txt', encoding='utf8') as result:
+        uniqlines = set(result.readlines())
+        with open('notes2.txt', 'w', encoding='utf8') as rmdup:
+            rmdup.writelines(set(uniqlines))
