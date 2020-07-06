@@ -1,8 +1,8 @@
 # Kazakhstan-Pharmacy
-> List of all pharmacies in Kazakhstan
+> List of all (2977) pharmacies in Kazakhstan
 
 ## General info
-> Addresses and names of all pharmacies in Kazakhstan
+> Addresses and names of all pharmacies in Kazakhstan. Result will be in the 'note2.txt'.
 
 ## Install it
 `pip install BeautifulSoup`<br/>
